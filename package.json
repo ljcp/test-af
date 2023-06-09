@@ -1,0 +1,11 @@
+{
+  "name": "test-af",
+  "version": "1.0.0",
+  "description": "test af",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
