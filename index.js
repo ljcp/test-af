@@ -1,10 +1,20 @@
-const { app } = require('@azure/functions');
+const fs = require('fs');
+const path = require('path');
 
-app.http('helloWorld1', {
-    route: 'hello/world',
-    methods: ['POST', 'GET'],
-    handler: async (request, context) => {
-        context.log('Http function was triggered.');
-        return { body: 'Hello, world!' };
+const { app, output } = require('@azure/functions');
+
+app.timer('timerTrigger1', {
+    schedule: '*/5 * * * * *',
+    handler: (myTimer, context) => {
+        const filePath = path.resolve(__dirname,'output.txt');
+        const data = new Date().toISOString() + '\n';
+
+        fs.appendFile(filePath, data, (err) => {
+            if (err) {
+                console.log(`Error occurred: ${err}`);
+            } else {
+                console.log(`Date string appended to file: ${filePath}`);
+            }
+        });
     }
 });
