@@ -1,13 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+const { app } = require('@azure/functions');
 
-const filePath = path.resolve(__dirname,'output.txt');
-const data = new Date().toISOString() + '\n';
-
-fs.appendFile(filePath, data, (err) => {
-    if (err) {
-        console.log(`Error occurred: ${err}`);
-    } else {
-        console.log(`Date string appended to file: ${filePath}`);
+app.http('helloWorld1', {
+    methods: ['POST', 'GET'],
+    handler: async (request, context) => {
+        context.log('Http function was triggered.');
+        return { body: 'Hello, world!' };
     }
 });
