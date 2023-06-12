@@ -6,6 +6,7 @@ const { app, output } = require('@azure/functions');
 app.timer('timerTrigger1', {
     schedule: '*/5 * * * * *',
     handler: (myTimer, context) => {
+        context.log(`Something has happened haha. Invocation ID: "${context.invocationId}"`);
         const filePath = path.resolve(__dirname,'output.txt');
         const data = new Date().toISOString() + '\n';
 
